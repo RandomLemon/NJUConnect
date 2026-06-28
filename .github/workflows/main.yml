@@ -37,11 +37,6 @@ jobs:
             goarch: arm
             goarm: 5
           # END Linux ARM 5 6 7
-          # BEGIN Windows ARM 7
-          - goos: windows
-            goarch: arm
-            goarm: 7
-          # END Windows ARM 7
           # BEGIN Other architectures
           - goos: darwin
             goarch: arm64
@@ -106,11 +101,10 @@ jobs:
           pushd build_assets || exit 1
           zip -9vr ../EasierConnect-$ASSET_NAME.zip .
           popd || exit 1
-      
+
       - name: Upload release binary
         if: github.event_name == 'release'
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           gh release upload ${{ github.event.release.tag_name }} EasierConnect-${{ steps.get_filename.outputs.ASSET_NAME }}.zip
-
