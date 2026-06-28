@@ -7,6 +7,9 @@ import (
 	"gvisor.dev/gvisor/pkg/tcpip/stack"
 )
 
+var SocksBind = ":1080"
+var DebugDump = false
+
 type EasyConnectClient struct {
 	queryConn net.Conn
 	clientIp  []byte

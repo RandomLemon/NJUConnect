@@ -2,6 +2,7 @@ package main
 
 import (
 	"EasierConnect/core"
+	"EasierConnect/tui"
 	"flag"
 	"fmt"
 	"log"
@@ -12,7 +13,6 @@ import (
 )
 
 func main() {
-	// CLI args
 	host, port, username, password, socksBind, twfId, totpKey := "", 0, "", "", "", "", ""
 	flag.StringVar(&host, "server", "", "EasyConnect server address (e.g. vpn.nju.edu.cn, sslvpn.sysu.edu.cn)")
 	flag.StringVar(&username, "username", "", "Your username")
@@ -26,7 +26,8 @@ func main() {
 	flag.Parse()
 
 	if host == "" || ((username == "" || password == "") && twfId == "") {
-		log.Fatal("Missing required cli args, refer to `EasierConnect --help`.")
+		tui.Start()
+		return
 	}
 	server := fmt.Sprintf("%s:%d", host, port)
 
