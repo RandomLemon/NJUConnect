@@ -25,3 +25,5 @@ go.work
 .direnv
 .go
 .cache
+
+main
