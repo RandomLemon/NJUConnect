@@ -39,12 +39,12 @@ func ServeSocks5(ipStack *stack.Stack, selfIp []byte, bindAddr string) {
 			addrTarget := tcpip.FullAddress{
 				NIC:  defaultNIC,
 				Port: uint16(port),
-				Addr: tcpip.Address(target.IP),
+				Addr: tcpip.AddrFrom4Slice(target.IP),
 			}
 
 			bind := tcpip.FullAddress{
 				NIC:  defaultNIC,
-				Addr: tcpip.Address(selfIp),
+				Addr: tcpip.AddrFrom4Slice(selfIp),
 			}
 
 			return gonet.DialTCPWithBind(context.Background(), ipStack, bind, addrTarget, header.IPv4ProtocolNumber)
